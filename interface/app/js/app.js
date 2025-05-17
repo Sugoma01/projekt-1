@@ -460,15 +460,65 @@ function generateRoundLogTable(addedRessources) {
     html += "</table><br/>";
     roundLog += html;
 }
+function showWorkerRecruitment() {
+    closeOverlay();
+    const overlay_html = $("overlay");
+    overlay_html.css({ "display": "flex" });
+    overlay_html.find("h1").text("Arbeiter anwerben");
+    overlay_html.find("p").text("Hier kannst du deine Fabriken mit zusätzlichen Arbeitern ausstatten.");
+    overlay_html.find("table").remove();
+    overlay_html.find("button").remove();
+
+
+    let table = $("<table>");
+    let header = $("<tr>");
+    header.append("<th>Fabrik</th>");
+    header.append("<th>Arbeiter</th>");
+    header.append("<th>Aktion</th>");
+    table.append(header);
+
+    for (const id in saveGame.factoryList) {
+        const factory = saveGame.factoryList[id];
+        const def = factoryDefinitions[factory.type];
+        if (!def) continue;
+
+        const row = $("<tr>");
+        row.append("<td>" + def.name + "</td>");
+        row.append("<td>" + factory.workers + "/" + def.workers + "</td>");
+
+        if (factory.workers < def.workers) {
+            const recruitBtn = $("<button>Anwerben</button>");
+            recruitBtn.on("click", function () {
+                factory.workers += 1;
+                if (factory.workers > def.workers) factory.workers = def.workers;
+                showWorkerRecruitment();
+            });
+            row.append($("<td>").append(recruitBtn));
+        } else {
+            row.append("<td>Voll besetzt</td>");
+        }
+
+        table.append(row);
+    }
+
+    overlay_html.append(table);
+
+    const closeBtn = $("<button>Schließen</button>");
+    closeBtn.on("click", function () {
+        closeOverlay();
+        loadSavegame();
+    });
+    overlay_html.append(closeBtn);
+}
 
 
 
 $(document).ready(function () {
-
     roundStart()
     addNavClick("VUE", "marketViewer()");
     addNavClick("Lager", "showStorage()");
     addNavClick("endRound", "console.log(calcRoundEnd(), roundLog);");
+    addNavClick("Workers", "showWorkerRecruitment()");
 });
 
 
