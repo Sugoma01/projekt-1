@@ -470,3 +470,85 @@ $(document).ready(function () {
     addNavClick("Lager", "showStorage()");
     addNavClick("endRound", "console.log(calcRoundEnd(), roundLog);");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// saveGame = {};
+
+
+// function fetchSavegame() {
+//     return fetch('getSavegame.php', { credentials: 'include' })
+//         .then(r => r.json())
+//         .then(data => { saveGame = data })
+// }
+
+// function saveSavegame() {
+//     return fetch('update_savegame.php', {
+//         method: 'POST',
+//         credentials: 'include',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(saveGame)
+//     }).then(r => r.json())
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     fetchSavegame().then(() => {
+//         saveGame = {
+//             ressources: {
+//                 "credits": 100,
+//                 "material_raw_metals": 0,
+//                 "material_fabrics": 0,
+//                 "material_equipment": 0,
+//                 "processed_steel": 0,
+//                 "processed_Clothes": 0,
+//                 "processed_furniture": 0
+//             },
+//             marketValues: {
+//                 "material_raw_metals": 0.86,
+//                 "material_fabrics": 0.77,
+//                 "material_equipment": 1,
+//                 "processed_steel": 4,
+//                 "processed_Clothes": 2,
+//                 "processed_furniture": 5
+//             },
+//             factoryList:
+//             {
+//                 0: {
+//                     type: "mine",
+//                     workers: 5,
+//                     modifer: 0,
+//                     modifer_time: 0,
+//                     modifer_description: ""
+//                 },
+//                 1: {
+//                     type: "steel",
+//                     workers: 5,
+//                     modifer: 0,
+//                     modifer_time: 0,
+//                     modifer_description: ""
+//                 }
+//             }
+//         }
+//         roundStart()
+//         addNavClick("VUE", "marketViewer()")
+//         addNavClick("Lager", "showStorage()")
+
+//         document.getElementById('endRound').addEventListener('click', () => {
+//             const result = calcRoundEnd()
+//             roundLog = result
+//             saveSavegame().then(() => loadSavegame())
+//         })
+//     })
+// })
